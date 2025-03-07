@@ -5,8 +5,9 @@ using UnityEngine;
 public class TriggerScript : MonoBehaviour
 {
 
-    [SerializeField] private Transform enemy;
-    [SerializeField] private float enemeySpeed;
+    [SerializeField] private Transform enemyPrefab;
+    [SerializeField] private Transform enemySpawnPos;
+    
     private bool moveEnemy = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,11 +25,19 @@ public class TriggerScript : MonoBehaviour
     {
         if (moveEnemy)
         {
-            moveEnemy = true;
-            enemy.GetComponent<Rigidbody2D>().velocity=new Vector2(-1 * enemeySpeed,0);
+            for (int i=0; i<1; i++)
+            {
+                SpawnEnemy();
+                moveEnemy = false;
+            }
             
         }
 
+    }
+
+    void SpawnEnemy()
+    {
+        Instantiate(enemyPrefab, enemySpawnPos.position, enemyPrefab.transform.rotation);
     }
 
 }
