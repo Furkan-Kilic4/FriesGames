@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    LevelManagerScript levelManagerScript;
     private Rigidbody2D rb;
     SpriteRenderer playerRenderer;
     private float horizontalMove;
     [SerializeField] private float playerSpeed = 10f;
+    float fallScreenBounds = -6f;
 
     void Start()
     {
+        levelManagerScript = GameObject.Find("Level Manager").GetComponent<LevelManagerScript>();
         rb = GetComponent<Rigidbody2D>();
         playerRenderer = GetComponent<SpriteRenderer>();
+        Invoke("SpawnCharacterAtTime", 3f);
     }
 
     
@@ -20,6 +24,7 @@ public class Movement : MonoBehaviour
     {
         PlayerMovement();
         FlipWithRenderer();
+        DestroyPlayer();
     }
 
     void PlayerMovement()
@@ -38,6 +43,16 @@ public class Movement : MonoBehaviour
         else if (horizontalMove < 0)
         {
             playerRenderer.flipX = true;
+        }
+    }
+
+    void DestroyPlayer()
+    {
+        if (transform.position.y < fallScreenBounds)
+        {
+            Destroy(gameObject);
+            levelManagerScript.RespawnPlayer();
+            Invoke("SpawnCharacterAtTime", 3f);
         }
     }
 }

@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class CollisionScript : MonoBehaviour
 {
+    LevelManagerScript levelManagerScript;
     [SerializeField] private float enemyAttackSpeed;
     float leftScreenBounds = -10f;
+
+    private void Awake()
+    {
+        levelManagerScript = GameObject.Find("Level Manager").GetComponent<LevelManagerScript>();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
+            levelManagerScript.RespawnPlayer();
+            
         }
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate()  
     {
         AttackEnemy();
         DestroyEnemy();
@@ -27,7 +35,7 @@ public class CollisionScript : MonoBehaviour
 
     void DestroyEnemy()
     {
-        if (transform.position.x < -leftScreenBounds)
+        if (transform.position.x < leftScreenBounds)
         {
             Destroy(gameObject);
         }
