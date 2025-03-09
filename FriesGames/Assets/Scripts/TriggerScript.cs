@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TriggerScript : MonoBehaviour
 {
-
+    
     [SerializeField] private Transform enemyPrefab;
     [SerializeField] private Transform enemySpawnPos;
     

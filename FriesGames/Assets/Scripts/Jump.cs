@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
+    SoundManager soundManagerScript;
     private Rigidbody2D rb;
     private Vector2 vUp = new Vector2(0, 1);
     [SerializeField] private float jumpAmount;
@@ -16,6 +17,7 @@ public class Jump : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        soundManagerScript = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
     }
 
 
@@ -24,6 +26,7 @@ public class Jump : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse); //AddForce kuvvet uygular
+            soundManagerScript.Jump();
         }
 
         if (rb.velocity.y >= 0)

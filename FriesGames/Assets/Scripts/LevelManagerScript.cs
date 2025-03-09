@@ -20,7 +20,7 @@ public class LevelManagerScript : MonoBehaviour
     public void RespawnPlayer()
     {
 
-        Invoke("SpawnPlayer", 1f);
+        Invoke("SpawnPlayer", 0.3f);
     }
 }
 

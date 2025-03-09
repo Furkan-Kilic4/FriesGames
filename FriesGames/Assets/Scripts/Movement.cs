@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    SoundManager soundManagerScript;
     LevelManagerScript levelManagerScript;
     private Rigidbody2D rb;
     SpriteRenderer playerRenderer;
@@ -13,10 +14,10 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+        soundManagerScript = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         levelManagerScript = GameObject.Find("Level Manager").GetComponent<LevelManagerScript>();
         rb = GetComponent<Rigidbody2D>();
         playerRenderer = GetComponent<SpriteRenderer>();
-        Invoke("SpawnCharacterAtTime", 3f);
     }
 
     
@@ -50,9 +51,9 @@ public class Movement : MonoBehaviour
     {
         if (transform.position.y < fallScreenBounds)
         {
+            soundManagerScript.Fall();
             Destroy(gameObject);
             levelManagerScript.RespawnPlayer();
-            Invoke("SpawnCharacterAtTime", 3f);
         }
     }
 }
