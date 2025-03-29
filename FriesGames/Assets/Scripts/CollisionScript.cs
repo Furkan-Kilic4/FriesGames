@@ -7,12 +7,14 @@ public class CollisionScript : MonoBehaviour
     SoundManager soundManagerScript;
     LevelManagerScript levelManagerScript;
     [SerializeField] private float enemyAttackSpeed;
+    UIManager UIManagerScript;
     float leftScreenBounds = -10f;
 
     private void Awake()
     {
         soundManagerScript = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         levelManagerScript = GameObject.Find("Level Manager").GetComponent<LevelManagerScript>();
+        UIManagerScript = GameObject.Find("UI Manager").GetComponent<UIManager>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -21,6 +23,7 @@ public class CollisionScript : MonoBehaviour
             soundManagerScript.AttackEnemy();
             Destroy(collision.gameObject);
             levelManagerScript.RespawnPlayer();
+            UIManagerScript.GetComponent<Canvas>().enabled = true;
             
         }
     }

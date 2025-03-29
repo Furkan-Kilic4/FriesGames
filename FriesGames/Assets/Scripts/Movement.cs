@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
 {
     SoundManager soundManagerScript;
     LevelManagerScript levelManagerScript;
+    UIManager UIManagerScript;
     private Rigidbody2D rb;
     SpriteRenderer playerRenderer;
     private float horizontalMove;
@@ -16,6 +17,7 @@ public class Movement : MonoBehaviour
     {
         soundManagerScript = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         levelManagerScript = GameObject.Find("Level Manager").GetComponent<LevelManagerScript>();
+        UIManagerScript = GameObject.Find("UI Manager").GetComponent<UIManager>(); 
         rb = GetComponent<Rigidbody2D>();
         playerRenderer = GetComponent<SpriteRenderer>();
     }
@@ -54,6 +56,7 @@ public class Movement : MonoBehaviour
             soundManagerScript.Fall();
             Destroy(gameObject);
             levelManagerScript.RespawnPlayer();
+            UIManagerScript.GetComponent<Canvas>().enabled = true;
         }
     }
 }

@@ -6,9 +6,11 @@ public class LevelManagerScript : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform playerSpawnPos;
+    UIManager UIManagerScript;
     
     void Awake()
     {
+        UIManagerScript = GameObject.Find("UI Manager").GetComponent<UIManager>();
         SpawnPlayer();
     }
 
@@ -20,7 +22,7 @@ public class LevelManagerScript : MonoBehaviour
     public void RespawnPlayer()
     {
 
-        Invoke("SpawnPlayer", 0.3f);
+        //Invoke("SpawnPlayer", 0.3f);
     }
 }
 
