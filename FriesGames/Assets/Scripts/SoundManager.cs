@@ -8,7 +8,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip attackEnemy;
     [SerializeField] private AudioClip jump;
     [SerializeField] private AudioClip fall;
+    [SerializeField] private AudioClip winsound;
     //[SerializeField] private AudioClip land;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -30,10 +32,15 @@ public class SoundManager : MonoBehaviour
         audioSource.PlayOneShot(fall);
     }
 
+    public void WinSound()
+    {
+        audioSource.PlayOneShot(winsound);
+    }
+
     /* public void Land()
     {
         audioSource.PlayOneShot(land);
     } */
 
-   
+
 }
